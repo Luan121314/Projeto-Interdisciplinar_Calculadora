@@ -66,6 +66,7 @@ public class Interface extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         buttonGroup1.add(RadioBhaskara);
+        RadioBhaskara.setSelected(true);
         RadioBhaskara.setText("Bhaskara");
         RadioBhaskara.setActionCommand(RadioBhaskara.getText());
         RadioBhaskara.addActionListener(new java.awt.event.ActionListener() {
@@ -204,13 +205,13 @@ public class Interface extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(txtVb, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(LbA, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                        .addComponent(LbA, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                         .addGap(20, 20, 20)
-                        .addComponent(LbB, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)))
+                        .addComponent(LbB, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(LbC, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                        .addComponent(LbC, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                         .addGap(176, 176, 176))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(txtVc, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,7 +313,7 @@ public class Interface extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,26 +476,44 @@ public class Interface extends javax.swing.JFrame {
             }
             res.setText(str);
         } else if (radioConsClasse.isSelected()) {
-            /* RadioBhaskara.setActionCommand("Bahskhara");
-            radioCil.setActionCommand("Cilindro");
-            radioCone.setActionCommand("Cone");
-            radioParalelepipedo.setActionCommand("Paralelepipedo");
-            radioPonto.setActionCommand("Ponto");
-            radioTrian.setActionCommand("Triangulo");
-            radioQuadrado.setActionCommand("Quadrado");
-            String selecionado = buttonGroup1.getSelection().getActionCommand(); */
             String selecionado = buttonGroup1.getSelection().getActionCommand();
+            switch (selecionado) {
+                case "Bhaskara":
+                    consultaClasse(Bhaskara.class.getName());
+                    break;
+                case "Cilindro":
+                    consultaClasse(Cilindro.class.getName());
+                    break;
+                case "Cone":
+                    consultaClasse(Cone.class.getName());
+                    break;
+                case "Paralelepipedo":
+                    consultaClasse(Paralelepipedo.class.getName());
+                    break;
+                case "Ponto":
+                    consultaClasse(Ponto.class.getName());
+                    break;
+                case "Quadrado":
+                    consultaClasse(Quadrado.class.getName());
+                    break;
+                case "Triângulo":
+                    consultaClasse(Triangulo.class.getName());
 
-            for (int i = 0; i < obj_array.size(); i++) {
-                // if( obj_array.get(i) instanceof selecionado )
-               
             }
 
-               
+        } else {
             JOptionPane.showMessageDialog(this, "Selecione o tipo de consulta");
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
-
+    public void consultaClasse(String classe) {
+        String str = "";
+        for (int i = 0; i < obj_array.size(); i++) {
+            if (obj_array.get(i).getClass().getName().equalsIgnoreCase(classe)) {
+                str += obj_array.get(i).toString();
+            }
+        }
+        res.setText(str);
+    }
     private void radioConsClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioConsClasseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioConsClasseActionPerformed

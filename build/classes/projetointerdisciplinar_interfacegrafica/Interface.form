@@ -48,7 +48,7 @@
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="75" max="32767" attributes="0"/>
+              <EmptySpace pref="71" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -126,6 +126,7 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
             </Property>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Bhaskara"/>
             <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection component="RadioBhaskara" name="text" type="property"/>
@@ -297,15 +298,15 @@
                               <Component id="txtVb" min="-2" pref="82" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="LbA" pref="102" max="32767" attributes="0"/>
+                              <Component id="LbA" pref="103" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="LbB" pref="79" max="32767" attributes="0"/>
+                              <Component id="LbB" pref="81" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="LbC" pref="89" max="32767" attributes="0"/>
+                              <Component id="LbC" pref="91" max="32767" attributes="0"/>
                               <EmptySpace min="176" pref="176" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">

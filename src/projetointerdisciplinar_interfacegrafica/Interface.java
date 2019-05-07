@@ -5,10 +5,13 @@
  */
 package projetointerdisciplinar_interfacegrafica;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicTableUI;
 
 /**
  *
@@ -22,8 +25,10 @@ public class Interface extends javax.swing.JFrame {
      * Creates new form Interface
      */
     public Interface() {
+        carregarDados();
         initComponents();
-        carregaPreDefinidos();
+        
+        //carregaPreDefinidos();
 
     }
 
@@ -61,6 +66,14 @@ public class Interface extends javax.swing.JFrame {
         setTitle("Projeto interdisciplinar");
         setBackground(new java.awt.Color(255, 255, 255));
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo de calculo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -356,7 +369,6 @@ public class Interface extends javax.swing.JFrame {
         obj_array.add(new Triangulo(2f, 9f, 21f));
         obj_array.add(new Triangulo(21f, 2f, 9f));
         obj_array.add(new Triangulo(2f, 21f, 2f));
-
     }
 
     private void RadioBhaskaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioBhaskaraActionPerformed
@@ -388,7 +400,6 @@ public class Interface extends javax.swing.JFrame {
         LbA.setText("Lado A");
         LbB.setText("Lado B");
         LbC.setText("Lado C");
-
     }//GEN-LAST:event_radioTrianActionPerformed
 
     private void radioConeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioConeActionPerformed
@@ -514,9 +525,57 @@ public class Interface extends javax.swing.JFrame {
         }
         res.setText(str);
     }
+    public final void salvarDados(){
+        System.out.println("Salvando dados");
+        try {
+            FileOutputStream fos = new FileOutputStream("C:/Temp/Projeto_Inter.dat");
+            ObjectOutputStream out = new ObjectOutputStream(fos);
+            for(int i =0; i < obj_array.size(); i++){
+                out.writeObject(obj_array.get(i)); // Gravando objetos no arquivo
+                fos.close();
+                out.close();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Erro na gravação dos dados !\n Info Sobre o erro: "+ex.getMessage(), "Dados não gravados",JOptionPane.WARNING_MESSAGE);
+        }
+        System.out.println("Dados salvos");
+    }
+    public void carregarDados(){
+        //Este método carrega os objetos serializados gravados em 'filename' no vetor 'vetor'.
+        System.out.println("Carregando dados");
+        FileInputStream fis;
+        ObjectInputStream in;
+        try {
+            fis = new FileInputStream("C:/Temp/Projeto_Inter.dat");
+            in = new ObjectInputStream(fis);
+            obj_array.clear(); //esvaziamos o ArrayList
+            boolean sair = false;
+            do {
+                try {
+                    Object info = in.readObject(); // lê um objeto do arquivo
+                    obj_array.add(info); // adiciona na lista o objeto lido; supondo memória suficiente
+                } catch (EOFException normalEof) {
+                    sair = true; // EOF (end of file), situação normal => acabaram os objetos
+                }
+            } while (!sair);
+            in.close();
+            fis.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar dados \nInformação sobre o erro: " + e.getMessage(),"Dados não carregados",JOptionPane.WARNING_MESSAGE);
+        }
+        System.out.println("Dados carregados");
+    }
     private void radioConsClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioConsClasseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_radioConsClasseActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        salvarDados();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -544,7 +603,7 @@ public class Interface extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -552,6 +611,7 @@ public class Interface extends javax.swing.JFrame {
                 new Interface().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
